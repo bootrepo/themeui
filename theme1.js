@@ -10,7 +10,7 @@ var theme = {
     theme.stickyHeader();
     theme.subMenu();
     theme.offCanvas();
-    theme.isotope();
+    
     theme.onepageHeaderOffset();
     theme.anchorSmoothScroll();
     theme.imageHoverOverlay();
@@ -97,66 +97,7 @@ var theme = {
     }
   },
   /**
-   * Isotope
-   * Enables isotope grid layout and filtering
-   * Requires assets/js/vendor/isotope.pkgd.min.js
-   * Requires assets/js/vendor/imagesloaded.pkgd.min.js
-   */
-  isotope: () => {
-    var grids = document.querySelectorAll('.grid');
-    if(grids != null) {
-      grids.forEach(g => {
-        var grid = g.querySelector('.isotope');
-        var filtersElem = g.querySelector('.isotope-filter');
-        var buttonGroups = g.querySelectorAll('.isotope-filter');
-        var iso = new Isotope(grid, {
-          itemSelector: '.item',
-          layoutMode: 'masonry',
-          masonry: {
-            columnWidth: grid.offsetWidth / 12
-          },
-          percentPosition: true,
-          transitionDuration: '0.7s'
-        });
-        imagesLoaded(grid).on("progress", function() {
-          iso.layout({
-            masonry: {
-              columnWidth: grid.offsetWidth / 12
-            }
-          })
-        }),
-        window.addEventListener("resize", function() {
-          iso.arrange({
-            masonry: {
-              columnWidth: grid.offsetWidth / 12
-            }
-          });
-        }, true);
-        if(filtersElem != null) {
-          filtersElem.addEventListener('click', function(event) {
-            if(!matchesSelector(event.target, '.filter-item')) {
-              return;
-            }
-            var filterValue = event.target.getAttribute('data-filter');
-            iso.arrange({
-              filter: filterValue
-            });
-          });
-          for(var i = 0, len = buttonGroups.length; i < len; i++) {
-            var buttonGroup = buttonGroups[i];
-            buttonGroup.addEventListener('click', function(event) {
-              if(!matchesSelector(event.target, '.filter-item')) {
-                return;
-              }
-              buttonGroup.querySelector('.active').classList.remove('active');
-              event.target.classList.add('active');
-            });
-          }
-        }
-      });
-    }
-  },
-  /**
+  
    * Onepage Header Offset
    * Adds an offset value to anchor point equal to sticky header height on a onepage
    */
